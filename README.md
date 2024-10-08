@@ -1,3 +1,4 @@
 # DataStructureCheatSheet
 
 ## Stacks
+#queue
