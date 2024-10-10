@@ -2,3 +2,4 @@
 
 ## Stacks
 # queue
+## Linked list
