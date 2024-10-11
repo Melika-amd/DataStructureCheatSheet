@@ -9,15 +9,82 @@
 <body>
     <div class="container">
         <h1>Data Structures Summary</h1>
+        
         <div class="tabs">
             <button class="tab-btn active" data-tab="stacks">Stacks</button>
             <button class="tab-btn" data-tab="queues">Queues</button>
             <button class="tab-btn" data-tab="linked-lists">Linked Lists</button>
         </div>
+        
         <div class="tab-content">
             <div id="stacks" class="tab-pane active">
                 <h2>Stacks</h2>
-                <p>Content about stacks goes here.</p>
+                <div class="nested-tabs">
+                    <button class="nested-tab-btn active" data-nested-tab="stack-visualization">Visualization</button>
+                    <button class="nested-tab-btn" data-nested-tab="stack-code">Code</button>
+                    <button class="nested-tab-btn" data-nested-tab="stack-applications">Applications</button>
+                    <button class="nested-tab-btn" data-nested-tab="stack-complexity">Complexity</button>
+                </div>
+                <div class="nested-tab-content">
+                    <div id="stack-visualization" class="nested-tab-pane active">
+                        <h3>Stack Visualization</h3>
+                        <div id="stack-container">
+                            <div id="stack"></div>
+                            <div id="stack-controls">
+                                <button id="push-btn">Push</button>
+                                <button id="pop-btn">Pop</button>
+                                <button id="peek-btn">Peek</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="stack-code" class="nested-tab-pane">
+                        <h3>Stack Implementation</h3>
+                        <pre><code>
+class Stack {
+    constructor() {
+        this.items = [];
+    }
+    
+    push(element) {
+        this.items.push(element);
+    }
+    
+    pop() {
+        if (this.isEmpty()) return "Stack is empty";
+        return this.items.pop();
+    }
+    
+    peek() {
+        if (this.isEmpty()) return "Stack is empty";
+        return this.items[this.items.length - 1];
+    }
+    
+    isEmpty() {
+        return this.items.length === 0;
+    }
+}
+                        </code></pre>
+                    </div>
+                    <div id="stack-applications" class="nested-tab-pane">
+                        <h3>Stack Applications</h3>
+                        <ul>
+                            <li>Function call stack in programming languages</li>
+                            <li>Undo mechanism in text editors</li>
+                            <li>Expression evaluation and syntax parsing</li>
+                            <li>Backtracking algorithms</li>
+                        </ul>
+                    </div>
+                    <div id="stack-complexity" class="nested-tab-pane">
+                        <h3>Stack Complexity</h3>
+                        <table>
+                            <tr><th>Operation</th><th>Time Complexity</th></tr>
+                            <tr><td>Push</td><td>O(1)</td></tr>
+                            <tr><td>Pop</td><td>O(1)</td></tr>
+                            <tr><td>Peek</td><td>O(1)</td></tr>
+                            <tr><td>Search</td><td>O(n)</td></tr>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div id="queues" class="tab-pane">
                 <h2>Queues</h2>

@@ -13,18 +13,17 @@ body {
     padding: 20px;
 }
 
-h1 {
-    text-align: center;
+h1, h2, h3 {
     color: #333;
 }
 
-.tabs {
+.tabs, .nested-tabs {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.tab-btn {
+.tab-btn, .nested-tab-btn {
     background-color: #f4f4f4;
     border: none;
     outline: none;
@@ -35,25 +34,85 @@ h1 {
     font-size: 16px;
 }
 
-.tab-btn:hover {
+.tab-btn:hover, .nested-tab-btn:hover {
     background-color: #ddd;
 }
 
-.tab-btn.active {
+.tab-btn.active, .nested-tab-btn.active {
     background-color: #ccc;
 }
 
-.tab-content {
+.tab-content, .nested-tab-content {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.tab-pane {
+.tab-pane, .nested-tab-pane {
     display: none;
 }
 
-.tab-pane.active {
+.tab-pane.active, .nested-tab-pane.active {
     display: block;
+}
+
+#stack-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#stack {
+    width: 200px;
+    height: 300px;
+    border: 2px solid #333;
+    position: relative;
+}
+
+.plate {
+    width: 180px;
+    height: 30px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+    position: absolute;
+    left: 10px;
+    border-radius: 5px;
+}
+
+#stack-controls {
+    display: flex;
+    flex-direction: column;
+}
+
+#stack-controls button {
+    margin: 5px 0;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
 }
