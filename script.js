@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const nestedTabs = document.querySelectorAll('.nested-tab-btn');
     const nestedTabContents = document.querySelectorAll('.nested-tab-pane');
 
-
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const tabId = tab.getAttribute('data-tab');
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
     nestedTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const tabId = tab.getAttribute('data-nested-tab');
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(tabId).classList.add('active');
         });
     });
-
 
     const stack = [];
     const stackElement = document.getElementById('stack');
@@ -67,6 +64,49 @@ document.addEventListener('DOMContentLoaded', function() {
             alert(`Top item: ${stack[stack.length - 1]}`);
         } else {
             alert('Stack is empty');
+        }
+    });
+
+    const queue = [];
+    const queueElement = document.getElementById('queue');
+    const enqueueBtn = document.getElementById('enqueue-btn');
+    const dequeueBtn = document.getElementById('dequeue-btn');
+    const frontBtn = document.getElementById('front-btn');
+
+    function updateQueueVisualization() {
+        queueElement.innerHTML = '';
+        queue.forEach((item, index) => {
+            const block = document.createElement('div');
+            block.classList.add('block');
+            block.textContent = item;
+            block.style.left = `${index * 60}px`;
+            queueElement.appendChild(block);
+        });
+    }
+
+    enqueueBtn.addEventListener('click', () => {
+        const item = prompt('Enter an item to enqueue:');
+        if (item) {
+            queue.push(item);
+            updateQueueVisualization();
+        }
+    });
+
+    dequeueBtn.addEventListener('click', () => {
+        if (queue.length > 0) {
+            const item = queue.shift();
+            alert(`Dequeued item: ${item}`);
+            updateQueueVisualization();
+        } else {
+            alert('Queue is empty');
+        }
+    });
+
+    frontBtn.addEventListener('click', () => {
+        if (queue.length > 0) {
+            alert(`Front item: ${queue[0]}`);
+        } else {
+            alert('Queue is empty');
         }
     });
 });

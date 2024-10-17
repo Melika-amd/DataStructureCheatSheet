@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Structures Summary</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Data Structures Summary</h1>
-        
+
         <div class="tabs">
             <button class="tab-btn active" data-tab="stacks">Stacks</button>
             <button class="tab-btn" data-tab="queues">Queues</button>
             <button class="tab-btn" data-tab="linked-lists">Linked Lists</button>
             <button class="tab-btn" data-tab="trees">Tree</button>
         </div>
-        
+
         <div class="tab-content">
             <div id="stacks" class="tab-pane active">
                 <h2>Stacks</h2>
@@ -78,18 +80,113 @@ class Stack {
                     <div id="stack-complexity" class="nested-tab-pane">
                         <h3>Stack Complexity</h3>
                         <table>
-                            <tr><th>Operation</th><th>Time Complexity</th></tr>
-                            <tr><td>Push</td><td>O(1)</td></tr>
-                            <tr><td>Pop</td><td>O(1)</td></tr>
-                            <tr><td>Peek</td><td>O(1)</td></tr>
-                            <tr><td>Search</td><td>O(n)</td></tr>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Time Complexity</th>
+                            </tr>
+                            <tr>
+                                <td>Push</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Pop</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Peek</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Search</td>
+                                <td>O(n)</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
             </div>
             <div id="queues" class="tab-pane">
                 <h2>Queues</h2>
-                <p>Content about queues goes here.</p>
+                <div class="nested-tabs">
+                    <button class="nested-tab-btn active" data-nested-tab="queue-visualization">Visualization</button>
+                    <button class="nested-tab-btn" data-nested-tab="queue-code">Code</button>
+                    <button class="nested-tab-btn" data-nested-tab="queue-applications">Applications</button>
+                    <button class="nested-tab-btn" data-nested-tab="queue-complexity">Complexity</button>
+                </div>
+                <div class="nested-tab-content">
+                    <div id="queue-visualization" class="nested-tab-pane active">
+                        <h3>Queue Visualization</h3>
+                        <div id="queue-container">
+                            <div id="queue"></div>
+                            <div id="queue-controls">
+                                <button id="enqueue-btn">Enqueue</button>
+                                <button id="dequeue-btn">Dequeue</button>
+                                <button id="front-btn">Front</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="queue-code" class="nested-tab-pane">
+                        <h3>Queue Implementation</h3>
+                        <pre><code>
+class Queue {
+    constructor() {
+        this.items = [];
+    }
+    
+    enqueue(element) {
+        this.items.push(element);
+    }
+    
+    dequeue() {
+        if (this.isEmpty()) return "Queue is empty";
+        return this.items.shift();
+    }
+    
+    front() {
+        if (this.isEmpty()) return "Queue is empty";
+        return this.items[0];
+    }
+    
+    isEmpty() {
+        return this.items.length === 0;
+    }
+}
+                        </code></pre>
+                    </div>
+                    <div id="queue-applications" class="nested-tab-pane">
+                        <h3>Queue Applications</h3>
+                        <ul>
+                            <li>Task scheduling in operating systems</li>
+                            <li>Breadth-First Search in graphs</li>
+                            <li>Print job spooling</li>
+                            <li>Handling of requests on a single shared resource, like a printer or CPU</li>
+                        </ul>
+                    </div>
+                    <div id="queue-complexity" class="nested-tab-pane">
+                        <h3>Queue Complexity</h3>
+                        <table>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Time Complexity</th>
+                            </tr>
+                            <tr>
+                                <td>Enqueue</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Dequeue</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Front</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Search</td>
+                                <td>O(n)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div id="linked-lists" class="tab-pane">
                 <h2>Linked Lists</h2>
@@ -103,4 +200,5 @@ class Stack {
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
