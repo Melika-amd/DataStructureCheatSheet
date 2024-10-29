@@ -1,112 +1,108 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const tabs = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-pane');
-    const nestedTabs = document.querySelectorAll('.nested-tab-btn');
-    const nestedTabContents = document.querySelectorAll('.nested-tab-pane');
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.getAttribute('data-tab');
-            tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            tab.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        });
-    });
-
-    nestedTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.getAttribute('data-nested-tab');
-            nestedTabs.forEach(t => t.classList.remove('active'));
-            nestedTabContents.forEach(content => content.classList.remove('active'));
-            tab.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
-        });
-    });
-
-    const stack = [];
-    const stackElement = document.getElementById('stack');
-    const pushBtn = document.getElementById('push-btn');
-    const popBtn = document.getElementById('pop-btn');
-    const peekBtn = document.getElementById('peek-btn');
-
-    function updateStackVisualization() {
-        stackElement.innerHTML = '';
-        stack.forEach((item, index) => {
-            const plate = document.createElement('div');
-            plate.classList.add('plate');
-            plate.textContent = item;
-            plate.style.bottom = `${index * 30}px`;
-            stackElement.appendChild(plate);
-        });
+class StackVisualizer {
+    constructor() {
+        this.stack = [];
+        this.maxSize = 8;
+        this.colors = [
+            '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4',
+            '#FFEEAD', '#D4A5A5', '#9B59B6', '#3498DB'
+        ];
+        
+        this.stackVisual = document.getElementById('stack-visual');
+        this.pushBtn = document.getElementById('push-btn');
+        this.popBtn = document.getElementById('pop-btn');
+        this.peekBtn = document.getElementById('peek-btn');
+        this.messageDiv = document.getElementById('stack-message');
+        
+        this.initializeControls();
     }
 
-    pushBtn.addEventListener('click', () => {
-        const item = prompt('Enter an item to push:');
-        if (item) {
-            stack.push(item);
-            updateStackVisualization();
-        }
-    });
-
-    popBtn.addEventListener('click', () => {
-        if (stack.length > 0) {
-            const item = stack.pop();
-            alert(`Popped item: ${item}`);
-            updateStackVisualization();
-        } else {
-            alert('Stack is empty');
-        }
-    });
-
-    peekBtn.addEventListener('click', () => {
-        if (stack.length > 0) {
-            alert(`Top item: ${stack[stack.length - 1]}`);
-        } else {
-            alert('Stack is empty');
-        }
-    });
-
-    const queue = [];
-    const queueElement = document.getElementById('queue');
-    const enqueueBtn = document.getElementById('enqueue-btn');
-    const dequeueBtn = document.getElementById('dequeue-btn');
-    const frontBtn = document.getElementById('front-btn');
-
-    function updateQueueVisualization() {
-        queueElement.innerHTML = '';
-        queue.forEach((item, index) => {
-            const block = document.createElement('div');
-            block.classList.add('block');
-            block.textContent = item;
-            block.style.left = `${index * 60}px`;
-            queueElement.appendChild(block);
-        });
+    initializeControls() {
+        this.pushBtn.addEventListener('click', () => this.push());
+        this.popBtn.addEventListener('click', () => this.pop());
+        this.peekBtn.addEventListener('click', () => this.peek());
     }
 
-    enqueueBtn.addEventListener('click', () => {
-        const item = prompt('Enter an item to enqueue:');
-        if (item) {
-            queue.push(item);
-            updateQueueVisualization();
+    push() {
+        if (this.stack.length >= this.maxSize) {
+            this.showMessage('Stack is full!');
+            return;
         }
-    });
 
-    dequeueBtn.addEventListener('click', () => {
-        if (queue.length > 0) {
-            const item = queue.shift();
-            alert(`Dequeued item: ${item}`);
-            updateQueueVisualization();
+        const randomNum = Math.floor(Math.random() * 100);
+        const plateColor = this.colors[this.stack.length % this.colors.length];
+        
+        const plate = document.createElement('div');
+        plate.className = 'stack-plate';
+        plate.style.backgroundColor = plateColor;
+        plate.textContent = randomNum;
+        
+        plate.style.transform = 'translateY(-20px)';
+        plate.style.opacity = '0';
+        
+        if (this.stackVisual.firstChild) {
+            this.stackVisual.insertBefore(plate, this.stackVisual.firstChild);
         } else {
-            alert('Queue is empty');
+            this.stackVisual.appendChild(plate);
         }
-    });
+        
+        this.stack.push({
+            element: plate,
+            value: randomNum
+        });
 
-    frontBtn.addEventListener('click', () => {
-        if (queue.length > 0) {
-            alert(`Front item: ${queue[0]}`);
-        } else {
-            alert('Queue is empty');
+        setTimeout(() => {
+            plate.style.transform = 'translateY(0)';
+            plate.style.opacity = '1';
+        }, 50);
+
+        this.showMessage(`Pushed: ${randomNum}`);
+    }
+
+    pop() {
+        if (this.stack.length === 0) {
+            this.showMessage('Stack is empty!');
+            return;
         }
-    });
+
+        const plateData = this.stack.pop();
+        const value = plateData.value;
+        const plate = plateData.element;
+        
+        plate.style.transform = 'translateY(-20px)';
+        plate.style.opacity = '0';
+
+        setTimeout(() => {
+            plate.remove();
+        }, 300);
+
+        this.showMessage(`Popped: ${value}`);
+    }
+
+    peek() {
+        if (this.stack.length === 0) {
+            this.showMessage('Stack is empty!');
+            return;
+        }
+
+        const plateData = this.stack[this.stack.length - 1];
+        const plate = plateData.element;
+        
+        plate.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            plate.style.transform = 'translateY(0)';
+        }, 500);
+
+        this.showMessage(`Peeking: ${plateData.value}`);
+    }
+
+    showMessage(message) {
+        this.messageDiv.textContent = message;
+        setTimeout(() => {
+            this.messageDiv.textContent = '';
+        }, 2000);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new StackVisualizer();
 });
