@@ -176,4 +176,30 @@ document.head.appendChild(style);
 
 document.addEventListener('DOMContentLoaded', () => {
     new StackVisualizer();
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const nestedTabBtns = document.querySelectorAll('.nested-tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    const nestedTabPanes = document.querySelectorAll('.nested-tab-pane');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanes.forEach(p => p.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    nestedTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const parent = btn.closest('.tab-pane');
+            parent.querySelectorAll('.nested-tab-btn').forEach(b => b.classList.remove('active'));
+            parent.querySelectorAll('.nested-tab-pane').forEach(p => p.classList.remove('active'));
+            
+            btn.classList.add('active');
+            parent.querySelector(`#${btn.dataset.nestedTab}`).classList.add('active');
+        });
+    });
 });

@@ -83,31 +83,61 @@
                     </div>
                     <div id="stack-code" class="nested-tab-pane">
                         <h3>Stack Implementation</h3>
-                        <pre><code>
-class Stack {
+                        <pre><code>class Stack {
     constructor() {
         this.items = [];
     }
     
+    // Add element to top of stack
     push(element) {
         this.items.push(element);
     }
     
+    // Remove and return top element
     pop() {
-        if (this.isEmpty()) return "Stack is empty";
+        if (this.isEmpty()) {
+            return "Stack is empty";
+        }
         return this.items.pop();
     }
     
+    // Return top element without removing
     peek() {
-        if (this.isEmpty()) return "Stack is empty";
+        if (this.isEmpty()) {
+            return "Stack is empty";
+        }
         return this.items[this.items.length - 1];
     }
     
+    // Check if stack is empty
     isEmpty() {
         return this.items.length === 0;
     }
+    
+    // Get size of stack
+    size() {
+        return this.items.length;
+    }
+    
+    // Clear the stack
+    clear() {
+        this.items = [];
+    }
+    
+    // Print the stack
+    print() {
+        console.log(this.items.toString());
+    }
 }
-                        </code></pre>
+
+// Example usage:
+const stack = new Stack();
+stack.push(10);
+stack.push(20);
+stack.push(30);
+console.log(stack.peek());  // Output: 30
+console.log(stack.pop());   // Output: 30
+console.log(stack.size());  // Output: 2</code></pre>
                     </div>
                     <div id="stack-applications" class="nested-tab-pane">
                         <h3>Stack Applications</h3>
