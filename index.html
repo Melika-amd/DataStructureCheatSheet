@@ -32,14 +32,53 @@
                 <div class="nested-tab-content">
                     <div id="stack-visualization" class="nested-tab-pane active">
                         <h3>Stack Visualization</h3>
-                        <div id="stack-container">
-                            <div id="stack-visual"></div>
-                            <div id="stack-controls">
-                                <button id="push-btn">Push</button>
-                                <button id="pop-btn">Pop</button>
-                                <button id="peek-btn">Peek</button>
+                        <div class="visualization-container">
+                            <div class="visualization-left">
+                                <div id="stack-container">
+                                    <div id="stack-visual"></div>
+                                    <div id="stack-controls">
+                                        <button id="push-btn">Push</button>
+                                        <button id="pop-btn">Pop</button>
+                                        <button id="peek-btn">Peek</button>
+                                    </div>
+                                    <div id="stack-message"></div>
+                                </div>
                             </div>
-                            <div id="stack-message"></div>
+                            <div class="visualization-right">
+                                <h4>Stack Operations</h4>
+                                <table class="operations-table">
+                                    <tr>
+                                        <th>Operation</th>
+                                        <th>Description</th>
+                                        <th>Time Complexity</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Push</td>
+                                        <td>Add element to top</td>
+                                        <td>O(1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pop</td>
+                                        <td>Remove top element</td>
+                                        <td>O(1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Peek</td>
+                                        <td>View top element</td>
+                                        <td>O(1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>isEmpty</td>
+                                        <td>Check if stack is empty</td>
+                                        <td>O(1)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Search</td>
+                                        <td>Find an element</td>
+                                        <td>O(n)</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div id="stack-code" class="nested-tab-pane">
